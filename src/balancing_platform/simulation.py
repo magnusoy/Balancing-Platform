@@ -29,23 +29,23 @@ scene.center = vector(1, 0, 0)
 scene.background = vector(0, 0, 0)
 
 # Creating objects
-ball = sphere(pos=vector(0, 0.745, 0), radius=0.5)
+ball = sphere(pos=vector(0, 0.745, 0), radius=0.5,  make_trail=True)
 platform = box(pos=vector(0, 0, 0), size=vector(50, 0.5, 50))
 floor = box(pos=vector(0, -10, 0), size=vector(100, 1, 100))
 wall_1 = box(pos=vector(50, 40, 0), size=vector(5, 100, 100))
 wall_2 = box(pos=vector(-50, 40, 0), size=vector(5, 100, 100))
 wall_3 = box(pos=vector(0, 40, -50), size=vector(100, 100, 5))
-leg_1 = box(pos=vector(20, -5, 20), size=vector(2.5, 10, 2.5))
-leg_2 = box(pos=vector(-20, -5, 20), size=vector(2.5, 10, 2.5))
-leg_3 = box(pos=vector(0, -5, -20), size=vector(2.5, 10, 2.5))
+leg_1 = cylinder(pos=vector(20, -10, 20), axis=vector(0, 10, 0), radius=1)
+leg_2 = cylinder(pos=vector(-20, -10, 20), axis=vector(0, 10, 0), radius=1)
+leg_3 = cylinder(pos=vector(0, -10, -20), axis=vector(0, 10, 0), radius=1)
 
 # Assigning objects textures
+platform.texture = {'file': platform_texture, 'bumpmap': None}
 floor.texture = {'file': floor_texture, 'bumpmap': None}
+ball.texture = {'file': ball_texture, 'bumpmap': None}
 wall_1.texture = {'file': wall_texture, 'bumpmap': None}
 wall_2.texture = {'file': wall_texture, 'bumpmap': None}
 wall_3.texture = {'file': wall_texture, 'bumpmap': None}
-ball.texture = {'file': ball_texture, 'bumpmap': None}
-platform.texture = {'file': platform_texture, 'bumpmap': None}
 leg_1.texture = {'file': platform_texture, 'bumpmap': None}
 leg_2.texture = {'file': platform_texture, 'bumpmap': None}
 leg_3.texture = {'file': platform_texture, 'bumpmap': None}
@@ -57,6 +57,7 @@ t = 0
 # Simulation
 while True:
     rate(100)
+    leg_1.axis = vector(0, 10+cos(t), 0)
     ball.pos.x += ball.velocity.x * dt * 5*cos(t)
     ball.pos.z += ball.velocity.z * dt * 5*sin(t)
     if ball.pos.x > 25 or ball.pos.x < -25:

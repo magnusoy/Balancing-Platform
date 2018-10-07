@@ -9,3 +9,4 @@ Version 0.1
 - Created folder structure
 - Installed all packages
 - Created ball tracking
+- Created simulation environment
