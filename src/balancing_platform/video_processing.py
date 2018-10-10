@@ -24,8 +24,8 @@ while True:
 
     # Defining the color  in HSV
     # Find limits using morphological_transformation.py
-    lower_color = np.array([0, 64, 49])
-    upper_color = np.array([116, 117, 155])
+    lower_color = np.array([0, 58, 119])
+    upper_color = np.array([95, 187, 210])
 
     # Creates a mask
     mask = cv2.inRange(hsv, lower_color, upper_color)

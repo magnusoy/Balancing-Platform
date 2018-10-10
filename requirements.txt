@@ -2,3 +2,6 @@ opencv-python
 numpy
 pymodbus
 vpython
+matplotlib
+scipy
+simple-pid

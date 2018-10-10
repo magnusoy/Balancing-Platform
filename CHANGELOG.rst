@@ -10,3 +10,10 @@ Version 0.1
 - Installed all packages
 - Created ball tracking
 - Created simulation environment
+
+Version 0.2
+===========
+
+- Added PID controller for simulation
+- Added modbus communication
+- Graph for motor rotation
