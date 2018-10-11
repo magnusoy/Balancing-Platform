@@ -12,52 +12,73 @@ Website: https://github.com/magnusoy/
 import cv2
 import numpy as np
 
-# Start recording on camera
-cap = cv2.VideoCapture(0)
 
-while True:
-    # Take each frame
-    _, frame = cap.read()
+class VideoProcessing(object):
 
-    # Convert RGB to HSV
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    def __init__(self, capture, watch):
+        self.DEBUG = watch
+        self.x = 0
+        self.y = 0
+        self.cap = capture
 
-    # Defining the color  in HSV
-    # Find limits using morphological_transformation.py
-    lower_color = np.array([0, 58, 119])
-    upper_color = np.array([95, 187, 210])
+    def getCoordinates(self):
+        _, frame = self.cap.read()
 
-    # Creates a mask
-    mask = cv2.inRange(hsv, lower_color, upper_color)
+        # Convert RGB to HSV
+        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-    # Enlarge the mask
-    kernel = np.ones((5, 5), np.uint8)
-    dilation = cv2.dilate(mask, kernel)
+        # Defining the color  in HSV
+        # Find limits using morphological_transformation.py
+        lower_color = np.array([0, 58, 119])
+        upper_color = np.array([95, 187, 210])
 
-    # Finding the contours
-    im2, contours, hierarchy = cv2.findContours(dilation, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        # Creates a mask
+        mask = cv2.inRange(hsv, lower_color, upper_color)
 
-    # Mark up only the largest contour
-    ball = max(contours, key=cv2.contourArea)
-    cv2.drawContours(frame, ball, -1, (0, 255, 0), 3)
+        # Enlarge the mask
+        kernel = np.ones((5, 5), np.uint8)
+        dilation = cv2.dilate(mask, kernel)
 
-    # ((x, y), radius) = cv2.minEnclosingCircle(ball)
+        # Finding the contours
+        im2, contours, hierarchy = cv2.findContours(dilation, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
-    # Find movements and calculates the center of the object
-    M = cv2.moments(ball)
-    center = (int(M["m10"] / M["m00"]), int(M["m01"] / M["m00"]))
+        # Mark up only the largest contour
+        if len(contours) > 0:
+            ball = max(contours, key=cv2.contourArea)
+            cv2.drawContours(frame, ball, -1, (0, 255, 0), 3)
+            M = cv2.moments(ball)
+            center = (int(M["m10"] / M["m00"]), int(M["m01"] / M["m00"]))
+            self.x = center[0]
+            self.y = center[1]
+            if self.DEBUG:
+                self.watch(frame, dilation)
+            return center
+        else:
+            if self.DEBUG:
+                self.watch(frame, dilation)
+            return None
 
-    # Show frame with contour and mask
-    cv2.imshow("Frame", frame)
-    cv2.imshow("Mask", dilation)
+    def watch(self, frame, dilation):
+        # Show frame with contour and mask
+        cv2.imshow("Frame", frame)
+        cv2.imshow("Mask", dilation)
 
-    print(center)
+    def stop(self):
+        # Close all windows
+        self.cap.release()
+        cv2.destroyAllWindows()
+        return True
 
-    # Break loop with ESC-key
-    key = cv2.waitKey(5) & 0xFF
-    if key == 27:
-        break
 
-# Close all windows
-cap.release()
-cv2.destroyAllWindows()
+if __name__ == '__main__':
+    cap = cv2.VideoCapture(0)
+    vp = VideoProcessing(cap, watch=True)
+
+    while True:
+        coordinates = vp.getCoordinates()
+        print(coordinates)
+        # Break loop with ESC-key
+        key = cv2.waitKey(5) & 0xFF
+        if key == 27:
+            break
+            running = vp.stop()

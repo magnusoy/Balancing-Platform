@@ -34,15 +34,15 @@ scene.center = vector(1, 0, 0)
 scene.background = vector(0, 0, 0)
 
 # Creating objects
-ball = sphere(pos=vector(0, 0.745, 0), radius=0.5,  make_trail=True)
-platform = box(pos=vector(0, 0, 0), size=vector(50, 0.5, 50))
-floor = box(pos=vector(0, -8.75, 0), size=vector(100, 1, 100))
-wall_1 = box(pos=vector(50, 40, 0), size=vector(5, 100, 100))
-wall_2 = box(pos=vector(-50, 40, 0), size=vector(5, 100, 100))
-wall_3 = box(pos=vector(0, 40, -50), size=vector(100, 100, 5))
-leg_1 = cylinder(pos=vector(20, -8.75, 20), axis=vector(0, 8.75, 0), radius=1)
-leg_2 = cylinder(pos=vector(-20, -8.75, 20), axis=vector(0, 8.75, 0), radius=1)
-leg_3 = cylinder(pos=vector(0, -8.75, -20), axis=vector(0, 8.75, 0), radius=1)
+ball = sphere(pos=vector(0, 0.745, 0), radius=0.5,  make_trail=True, color=color.green)
+platform = box(pos=vector(0, 0, 0), size=vector(50, 0.5, 50), color=color.red)
+floor = box(pos=vector(0, -8.75, 0), size=vector(100, 1, 100), color=color.cyan)
+wall_1 = box(pos=vector(50, 40, 0), size=vector(5, 100, 100), color=color.blue)
+wall_2 = box(pos=vector(-50, 40, 0), size=vector(5, 100, 100), color=color.blue)
+wall_3 = box(pos=vector(0, 40, -50), size=vector(100, 100, 5), color=color.blue)
+leg_1 = cylinder(pos=vector(20, -8.75, 20), axis=vector(0, 8.75, 0), radius=1, color=color.green)
+leg_2 = cylinder(pos=vector(-20, -8.75, 20), axis=vector(0, 8.75, 0), radius=1, color=color.green)
+leg_3 = cylinder(pos=vector(0, -8.75, -20), axis=vector(0, 8.75, 0), radius=1, color=color.green)
 
 
 def setpoint_x(s):
@@ -60,6 +60,7 @@ sl_z = slider(min=-25, max=25, value=0, length=200, bind=setpoint_z, right=15)
 wt_z = wtext(text='{:1.2f}'.format(sl_z.value))
 
 # Assigning objects textures
+"""
 platform.texture = {'file': platform_texture, 'bumpmap': None}
 floor.texture = {'file': floor_texture, 'bumpmap': None}
 ball.texture = {'file': ball_texture, 'bumpmap': None}
@@ -69,9 +70,7 @@ wall_3.texture = {'file': wall_texture, 'bumpmap': None}
 leg_1.texture = {'file': platform_texture, 'bumpmap': None}
 leg_2.texture = {'file': platform_texture, 'bumpmap': None}
 leg_3.texture = {'file': platform_texture, 'bumpmap': None}
-
-
-
+"""
 
 
 def update_x(power, dt):
@@ -93,8 +92,8 @@ def circle():
 
 
 def number_8():
-    pid_x.setpoint = 2 + (50 * cos(t)) / (1 + sin(t) * sin(t))
-    pid_z.setpoint = 1 + (50 * sin(t) * cos(t)) / (1 + sin(t) * sin(t))
+    pid_x.setpoint = 2 + (25 * cos(t)) / (1 + sin(t) * sin(t))
+    pid_z.setpoint = 1 + (25 * sin(t) * cos(t)) / (1 + sin(t) * sin(t))
 
 
 dt = 0.01

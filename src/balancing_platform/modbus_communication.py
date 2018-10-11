@@ -13,15 +13,24 @@ Website: https://github.com/magnusoy/
 # Importing packages
 from pymodbus.client.sync import ModbusTcpClient
 
-# Start a client socket
-client = ModbusTcpClient('127.0.0.1')
 
-# Send data
-client.write_coil(1, True)
+class Communication(object):
 
-# Read data
-result = client.read_coils(1, 1)
-print(result.bits[0])
+    def __init__(self, ip='127.0.0.1'):
+        self.ip = ip
+        self.client = ModbusTcpClient(self.ip)
 
-# Closes connection with socket
-client.close()
+    def send(self):
+        self.client.write_coil(1, True)
+
+    def receive(self):
+        result = self.client.read_coils()
+        return result.bits[0]
+
+    def close(self):
+        self.client.close()
+        return True
+
+
+if __name__ == '__main__':
+    comm = Communication()
