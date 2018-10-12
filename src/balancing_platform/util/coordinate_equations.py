@@ -17,6 +17,7 @@ plt.style.use("ggplot")
 
 
 def plot_motor_lift():
+    """docstring"""
     x_rad = np.linspace(0.01, 2 * np.pi, num=100)
     x_degrees = np.degrees(x_rad)
     pulses = 8000 / 360

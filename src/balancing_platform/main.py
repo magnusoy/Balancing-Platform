@@ -11,17 +11,22 @@ Website: https://github.com/magnusoy/
 # Importing packages
 import cv2
 from video_processing import VideoProcessing
-from modbus_communication import Communication
+from modbus_communication import ModbusClient
 
 if __name__ == '__main__':
     running = True
     cap = cv2.VideoCapture(0)
+    client = ModbusClient()
+
     vp = VideoProcessing(cap, watch=True)
 
-    while running:
+    while client.isConnected():
         coordinates = vp.getCoordinates()
-        print(coordinates)
+        client.send(coordinates[0])
+        client.send(coordinates[1])
+
         # Break loop with ESC-key
         key = cv2.waitKey(5) & 0xFF
         if key == 27:
-            running = vp.stop()
+            vp.stop()
+            break

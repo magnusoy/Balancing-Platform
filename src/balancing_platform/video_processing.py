@@ -14,7 +14,7 @@ import numpy as np
 
 
 class VideoProcessing(object):
-
+    """docstring"""
     def __init__(self, capture, watch):
         self.DEBUG = watch
         self.x = 0
@@ -22,6 +22,7 @@ class VideoProcessing(object):
         self.cap = capture
 
     def getCoordinates(self):
+        """docstring"""
         _, frame = self.cap.read()
 
         # Convert RGB to HSV
@@ -59,12 +60,12 @@ class VideoProcessing(object):
             return None
 
     def watch(self, frame, dilation):
-        # Show frame with contour and mask
+        """docstring"""
         cv2.imshow("Frame", frame)
         cv2.imshow("Mask", dilation)
 
     def stop(self):
-        # Close all windows
+        """docstring"""
         self.cap.release()
         cv2.destroyAllWindows()
         return True
@@ -80,5 +81,5 @@ if __name__ == '__main__':
         # Break loop with ESC-key
         key = cv2.waitKey(5) & 0xFF
         if key == 27:
-            break
             running = vp.stop()
+            break
