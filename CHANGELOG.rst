@@ -17,3 +17,10 @@ Version 0.2
 - Added PID controller for simulation
 - Added modbus communication
 - Graph for motor rotation
+
+Version 0.3
+===========
+
+- Completed Modbus communication
+- Completed Video Processing
+- Main will now locate ball and send coordinates over Modbus to PLC

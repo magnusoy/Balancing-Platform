@@ -59,19 +59,6 @@ wt_x = wtext(text='{:1.2f}'.format(sl_x.value))
 sl_z = slider(min=-25, max=25, value=0, length=200, bind=setpoint_z, right=15)
 wt_z = wtext(text='{:1.2f}'.format(sl_z.value))
 
-# Assigning objects textures
-"""
-platform.texture = {'file': platform_texture, 'bumpmap': None}
-floor.texture = {'file': floor_texture, 'bumpmap': None}
-ball.texture = {'file': ball_texture, 'bumpmap': None}
-wall_1.texture = {'file': wall_texture, 'bumpmap': None}
-wall_2.texture = {'file': wall_texture, 'bumpmap': None}
-wall_3.texture = {'file': wall_texture, 'bumpmap': None}
-leg_1.texture = {'file': platform_texture, 'bumpmap': None}
-leg_2.texture = {'file': platform_texture, 'bumpmap': None}
-leg_3.texture = {'file': platform_texture, 'bumpmap': None}
-"""
-
 
 def update_x(power, dt):
         ball.pos.x += 1 * power * dt

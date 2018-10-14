@@ -17,8 +17,6 @@ class VideoProcessing(object):
     """docstring"""
     def __init__(self, capture, watch):
         self.DEBUG = watch
-        self.x = 0
-        self.y = 0
         self.cap = capture
 
     def getCoordinates(self):
@@ -49,9 +47,12 @@ class VideoProcessing(object):
             cv2.drawContours(frame, ball, -1, (0, 255, 0), 3)
             M = cv2.moments(ball)
             center = (int(M["m10"] / M["m00"]), int(M["m01"] / M["m00"]))
-            self.x = center[0]
-            self.y = center[1]
             if self.DEBUG:
+                cv2.circle(frame, center, 3, (0, 0, 255), -1)
+                cv2.putText(frame, "centroid", (center[0] + 10, center[1]), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 255),
+                            1)
+                cv2.putText(frame, "(" + str(center[0]) + "," + str(center[1]) + ")", (center[0] + 10, center[1] + 15),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 255), 1)
                 self.watch(frame, dilation)
             return center
         else:
@@ -59,7 +60,8 @@ class VideoProcessing(object):
                 self.watch(frame, dilation)
             return None
 
-    def watch(self, frame, dilation):
+    @staticmethod
+    def watch(frame, dilation):
         """docstring"""
         cv2.imshow("Frame", frame)
         cv2.imshow("Mask", dilation)
@@ -77,7 +79,6 @@ if __name__ == '__main__':
 
     while True:
         coordinates = vp.getCoordinates()
-        print(coordinates)
         # Break loop with ESC-key
         key = cv2.waitKey(5) & 0xFF
         if key == 27:

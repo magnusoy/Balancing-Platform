@@ -19,7 +19,7 @@ from pymodbus.client.sync import ModbusTcpClient
 
 class ModbusClient(object):
     """docstring"""
-    def __init__(self, ip='127.0.0.1'):
+    def __init__(self, ip='192.168.2.17'):
         self.ip = ip
         self.client = ModbusTcpClient(self.ip)
         self.connection = self.client.connect()
@@ -28,18 +28,18 @@ class ModbusClient(object):
         """docstring"""
         return self.connection
 
-    def send(self, value):
+    def send(self, value, address):
         """docstring"""
-        builder = BinaryPayloadBuilder(byteorder=Endian.Little)
-        builder.add_32bit_float(value)
+        builder = BinaryPayloadBuilder(byteorder=Endian.Big)
+        builder.add_32bit_int(value)
         payload = builder.build()
-        result = self.client.write_registers(1, payload, skip_encode=True)
+        result = self.client.write_registers(address, payload, skip_encode=True, unit=1)
         return result
 
-    def read(self):
+    def read(self, address):
         """docstring"""
-        result = self.client.read_holding_registers(2001, 4)
-        decoder = BinaryPayloadDecoder.fromRegisters(result.registers, byteorder=Endian.Little)
+        result = self.client.read_holding_registers(address, 2, unit=1)
+        decoder = BinaryPayloadDecoder.fromRegisters(result.registers, byteorder=Endian.Big)
         return str(decoder.decode_32bit_float())
 
     def close(self):
@@ -51,4 +51,4 @@ class ModbusClient(object):
 if __name__ == '__main__':
     client = ModbusClient()
     while client.isConnected():
-        pass
+        client.read(address=12288)

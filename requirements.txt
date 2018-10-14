@@ -3,5 +3,4 @@ numpy
 pymodbus
 vpython
 matplotlib
-scipy
 simple-pid

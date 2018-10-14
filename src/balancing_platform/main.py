@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
+Locates ball on platform and sends the
+X and Y coordinates over Modbus to assigned
+slave on ip: 192.168.2.17, port: 502.
 
-
-Code by: Magnus Øye, Dated: 05.10-2018
+Code by: Magnus Øye, Dated: 13.10-2018
 Contact: magnus.oye@gmail.com
 Website: https://github.com/magnusoy/
 """
@@ -14,7 +16,6 @@ from video_processing import VideoProcessing
 from modbus_communication import ModbusClient
 
 if __name__ == '__main__':
-    running = True
     cap = cv2.VideoCapture(0)
     client = ModbusClient()
 
@@ -22,8 +23,8 @@ if __name__ == '__main__':
 
     while client.isConnected():
         coordinates = vp.getCoordinates()
-        client.send(coordinates[0])
-        client.send(coordinates[1])
+        client.send(value=coordinates[0], address=12288)
+        client.send(value=coordinates[1], address=12290)
 
         # Break loop with ESC-key
         key = cv2.waitKey(5) & 0xFF
