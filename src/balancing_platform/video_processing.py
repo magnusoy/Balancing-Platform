@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Object tracking based on HSV-mask.
+Object tracking based on a HSV-mask,
+and will contour out the biggest object
+and find its coordinates in the x and y plane.
 
 Code by: Magnus Øye, Dated: 05.10-2018
 Contact: magnus.oye@gmail.com
@@ -14,13 +16,15 @@ import numpy as np
 
 
 class VideoProcessing(object):
-    """docstring"""
+    """Finds biggest object according to HSV filtering.
+    Returns the coordinates in x and y plane."""
     def __init__(self, capture, watch):
         self.DEBUG = watch
         self.cap = capture
 
     def getCoordinates(self):
-        """docstring"""
+        """Finds the biggest object.
+        Return: X and Y coordinates from center of the object"""
         _, frame = self.cap.read()
 
         # Convert RGB to HSV
@@ -28,8 +32,8 @@ class VideoProcessing(object):
 
         # Defining the color  in HSV
         # Find limits using morphological_transformation.py
-        lower_color = np.array([0, 58, 119])
-        upper_color = np.array([95, 187, 210])
+        lower_color = np.array([29, 111, 187])
+        upper_color = np.array([45, 163, 230])
 
         # Creates a mask
         mask = cv2.inRange(hsv, lower_color, upper_color)
@@ -41,7 +45,7 @@ class VideoProcessing(object):
         # Finding the contours
         im2, contours, hierarchy = cv2.findContours(dilation, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
-        # Mark up only the largest contour
+        # Mark up only the largest contour and draw centroid
         if len(contours) > 0:
             ball = max(contours, key=cv2.contourArea)
             cv2.drawContours(frame, ball, -1, (0, 255, 0), 3)
@@ -58,27 +62,33 @@ class VideoProcessing(object):
         else:
             if self.DEBUG:
                 self.watch(frame, dilation)
-            return None
+            return 0, 0
 
     @staticmethod
     def watch(frame, dilation):
-        """docstring"""
+        """Works as a debug functionality if user
+        wants to see the frame and mask."""
         cv2.imshow("Frame", frame)
         cv2.imshow("Mask", dilation)
 
     def stop(self):
-        """docstring"""
+        """Releases the capture and close all frames runnning.
+        Return: True when everything is closed."""
         self.cap.release()
         cv2.destroyAllWindows()
         return True
 
 
+# Simple example of usage.
 if __name__ == '__main__':
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
+    cap.set(propId=3, value=640)
+    cap.set(propId=4, value=480)
     vp = VideoProcessing(cap, watch=True)
 
     while True:
         coordinates = vp.getCoordinates()
+        print(coordinates)
         # Break loop with ESC-key
         key = cv2.waitKey(5) & 0xFF
         if key == 27:

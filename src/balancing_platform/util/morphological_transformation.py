@@ -19,7 +19,7 @@ def nothing(x):
 
 
 # Start recording on camera
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 # Creates a window containing trackbars
 cv2.namedWindow("Trackbars")
 cv2.createTrackbar("L - H", "Trackbars", 0, 179, nothing)

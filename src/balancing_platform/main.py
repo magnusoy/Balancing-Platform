@@ -14,17 +14,24 @@ Website: https://github.com/magnusoy/
 import cv2
 from video_processing import VideoProcessing
 from modbus_communication import ModbusClient
+from joystick import Joystick
 
 if __name__ == '__main__':
-    cap = cv2.VideoCapture(0)
-    client = ModbusClient()
+    cap = cv2.VideoCapture(1)
+    cap.set(propId=3, value=640)
+    cap.set(propId=4, value=480)
 
+    client = ModbusClient()
+    # js = Joystick()
     vp = VideoProcessing(cap, watch=True)
 
     while client.isConnected():
         coordinates = vp.getCoordinates()
+        # joystick_coordinates = js.getEvents()
         client.send(value=coordinates[0], address=12288)
         client.send(value=coordinates[1], address=12290)
+        # client.send(value=joystick_coordinates[0], address=12292)
+        # client.send(value=joystick_coordinates[1], address=12294)
 
         # Break loop with ESC-key
         key = cv2.waitKey(5) & 0xFF

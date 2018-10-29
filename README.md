@@ -18,6 +18,7 @@ pip install pymodbus
 pip install vpython
 pip install matplotlib
 pip install simple-pid
+pip install pygame
 ```
 
 ### Installing
