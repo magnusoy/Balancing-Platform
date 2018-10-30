@@ -17,4 +17,4 @@ try:
     __all__ = [cv2, numpy, pymodbus, vpython, matplotlib, simple_pid]
     __version__ = get_distribution(dist_name).version
 except DistributionNotFound:
-    __version__ = '0.3'
+    __version__ = '0.4'

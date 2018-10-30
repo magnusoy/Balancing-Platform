@@ -7,7 +7,7 @@ receiving data.
 
 Code by: Magnus Øye, Dated: 05.10-2018
 Contact: magnus.oye@gmail.com
-Website: https://github.com/magnusoy/
+Website: https://github.com/magnusoy/Balancing-Platform
 """
 
 # Importing packages
@@ -31,13 +31,24 @@ class ModbusClient(object):
         Return: True if connected, False if not."""
         return self.connection
 
-    def send(self, value, address):
+    def sendInt(self, value, address):
         """Send a 32 bit value to the first modbus unit.
         Parameters: value and address where the value will be
         stored in.
         Return: Result if it was successful or not."""
         builder = BinaryPayloadBuilder(byteorder=Endian.Big)
         builder.add_32bit_int(value)
+        payload = builder.build()
+        result = self.client.write_registers(address, payload, skip_encode=True, unit=1)
+        return result
+
+    def sendFloat(self, value, address):
+        """Send a 32 bit value to the first modbus unit.
+        Parameters: value and address where the value will be
+        stored in.
+        Return: Result if it was successful or not."""
+        builder = BinaryPayloadBuilder(byteorder=Endian.Big)
+        builder.add_32bit_float(value)
         payload = builder.build()
         result = self.client.write_registers(address, payload, skip_encode=True, unit=1)
         return result

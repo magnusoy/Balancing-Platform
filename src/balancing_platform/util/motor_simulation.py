@@ -4,7 +4,7 @@
 
 Code by: Magnus Øye, Dated: 20.10-2018
 Contact: magnus.oye@gmail.com
-Website: https://github.com/magnusoy/
+Website: https://github.com/magnusoy/Balancing-Platform
 """
 
 # Importing packages

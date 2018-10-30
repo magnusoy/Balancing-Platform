@@ -7,7 +7,7 @@ and find its coordinates in the x and y plane.
 
 Code by: Magnus Øye, Dated: 05.10-2018
 Contact: magnus.oye@gmail.com
-Website: https://github.com/magnusoy/
+Website: https://github.com/magnusoy/Balancing-Platform
 """
 
 # Importing packages
@@ -15,7 +15,7 @@ import cv2
 import numpy as np
 
 
-class VideoProcessing(object):
+class ObjectDetection(object):
     """Finds biggest object according to HSV filtering.
     Returns the coordinates in x and y plane."""
     def __init__(self, capture, watch):
@@ -72,7 +72,7 @@ class VideoProcessing(object):
         cv2.imshow("Mask", dilation)
 
     def stop(self):
-        """Releases the capture and close all frames runnning.
+        """Releases the capture and close all frames running.
         Return: True when everything is closed."""
         self.cap.release()
         cv2.destroyAllWindows()
@@ -84,13 +84,13 @@ if __name__ == '__main__':
     cap = cv2.VideoCapture(1)
     cap.set(propId=3, value=640)
     cap.set(propId=4, value=480)
-    vp = VideoProcessing(cap, watch=True)
+    objectDetection = ObjectDetection(cap, watch=True)
 
     while True:
-        coordinates = vp.getCoordinates()
+        coordinates = objectDetection.getCoordinates()
         print(coordinates)
         # Break loop with ESC-key
         key = cv2.waitKey(5) & 0xFF
         if key == 27:
-            running = vp.stop()
+            running = objectDetection.stop()
             break

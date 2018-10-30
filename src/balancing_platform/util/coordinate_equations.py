@@ -6,7 +6,7 @@ watch ball roll around platform accordingly.
 
 Code by: Magnus Øye, Dated: 06.10-2018
 Contact: magnus.oye@gmail.com
-Website: https://github.com/magnusoy/
+Website: https://github.com/magnusoy/Balancing-Platform
 """
 
 # Importing packages

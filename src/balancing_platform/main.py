@@ -7,12 +7,12 @@ slave on ip: 192.168.2.17, port: 502.
 
 Code by: Magnus Øye, Dated: 13.10-2018
 Contact: magnus.oye@gmail.com
-Website: https://github.com/magnusoy/
+Website: https://github.com/magnusoy/Balancing-Platform
 """
 
 # Importing packages
 import cv2
-from video_processing import VideoProcessing
+from video_processing import objectDetection
 from modbus_communication import ModbusClient
 from joystick import Joystick
 
@@ -23,18 +23,18 @@ if __name__ == '__main__':
 
     client = ModbusClient()
     # js = Joystick()
-    vp = VideoProcessing(cap, watch=True)
+    objectDetection = VideoProcessing(cap, watch=True)
 
     while client.isConnected():
-        coordinates = vp.getCoordinates()
+        coordinates = objectDetection.getCoordinates()
         # joystick_coordinates = js.getEvents()
-        client.send(value=coordinates[0], address=12288)
-        client.send(value=coordinates[1], address=12290)
-        # client.send(value=joystick_coordinates[0], address=12292)
-        # client.send(value=joystick_coordinates[1], address=12294)
+        client.sendInt(value=coordinates[0], address=12288)
+        client.sendInt(value=coordinates[1], address=12290)
+        # client.sendFloat(value=joystick_coordinates[0], address=12292)
+        # client.sendFloat(value=joystick_coordinates[1], address=12294)
 
         # Break loop with ESC-key
         key = cv2.waitKey(5) & 0xFF
         if key == 27:
-            vp.stop()
+            objectDetection.stop()
             break

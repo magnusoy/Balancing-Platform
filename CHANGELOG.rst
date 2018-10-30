@@ -24,3 +24,11 @@ Version 0.3
 - Completed Modbus communication
 - Completed Video Processing
 - Main will now locate ball and send coordinates over Modbus to PLC
+
+Version 0.4
+===========
+
+- Joystick and draw mode added
+- Added comments in code
+- Added simple examples for each class
+- Updated HSV parameters to fit a tennis ball
