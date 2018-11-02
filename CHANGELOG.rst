@@ -32,3 +32,8 @@ Version 0.4
 - Added comments in code
 - Added simple examples for each class
 - Updated HSV parameters to fit a tennis ball
+
+Version 0.5
+===========
+- Added kinematic simulation and visualization
+- Fixed main loop

@@ -8,6 +8,7 @@ Website: https://github.com/magnusoy/Balancing-Platform
 """
 
 # Importing packages
+import numpy as np
 from math import sqrt, acos, pi
 import matplotlib.pyplot as plt
 
@@ -21,13 +22,14 @@ Z0 = 9.0
 offset = 4.0
 radius = 9.0
 countsPerRev = 400000
+angles = np.linspace(-10.0, 10.0, num=50)
 
 X = []
 Y1 = []
 Y2 = []
 Y3 = []
 
-for xValue in range(-10, 10):
+for xValue in angles:
     print('#'*50)
     roll = xValue * (pi/180.0)
     pitch = yValue * (pi/180.0)
@@ -53,11 +55,12 @@ for xValue in range(-10, 10):
     outM3 = angleM3 * (countsPerRev / 2 * pi)
     print('Counts: ', outM1, outM2, outM3)
     X.append(xValue)
-    Y1.append(degreeM1)
-    Y2.append(degreeM2)
-    Y3.append(degreeM3)
+    Y1.append(outM1)
+    Y2.append(outM2)
+    Y3.append(outM3)
 
 plt.plot(X, Y1)
 plt.plot(X, Y2)
 plt.plot(X, Y3)
+
 plt.show()

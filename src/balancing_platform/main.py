@@ -12,7 +12,7 @@ Website: https://github.com/magnusoy/Balancing-Platform
 
 # Importing packages
 import cv2
-from video_processing import objectDetection
+from video_processing import ObjectDetection
 from modbus_communication import ModbusClient
 from joystick import Joystick
 
@@ -23,7 +23,7 @@ if __name__ == '__main__':
 
     client = ModbusClient()
     # js = Joystick()
-    objectDetection = VideoProcessing(cap, watch=True)
+    objectDetection = ObjectDetection(cap, watch=True)
 
     while client.isConnected():
         coordinates = objectDetection.getCoordinates()
