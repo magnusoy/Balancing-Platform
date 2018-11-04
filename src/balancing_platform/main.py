@@ -16,6 +16,7 @@ from video_processing import ObjectDetection
 from modbus_communication import ModbusClient
 from joystick import Joystick
 
+# Main loop
 if __name__ == '__main__':
     cap = cv2.VideoCapture(1)
     cap.set(propId=3, value=640)
@@ -25,6 +26,7 @@ if __name__ == '__main__':
     # js = Joystick()
     objectDetection = ObjectDetection(cap, watch=True)
 
+    # Sends data over Modbus client for as long the connection is established
     while client.isConnected():
         coordinates = objectDetection.getCoordinates()
         # joystick_coordinates = js.getEvents()

@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Simulate gyroscope degrees of freedom, and
-watch ball roll around platform accordingly.
 
 Code by: Magnus Øye, Dated: 06.10-2018
 Contact: magnus.oye@gmail.com

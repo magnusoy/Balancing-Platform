@@ -14,6 +14,8 @@ import pygame
 
 
 class Joystick(object):
+    """Starts a Pygame instance for recording
+     joystick events."""
 
     pygame.init()
     pygame.joystick.init()
@@ -31,7 +33,8 @@ class Joystick(object):
             print('No joystick found.')
 
     def getEvents(self):
-        """docstring"""
+        """Records events from joystick.
+        Returns X and Y values in range from -1 to 1"""
         for event in pygame.event.get():
             if event.type == pygame.JOYAXISMOTION:  # Joystick
                 if self.joystick.get_axis(0) != self.lastMove0 or self.joystick.get_axis(1) != self.lastMove1:

@@ -9,9 +9,10 @@ Website: https://github.com/magnusoy/Balancing-Platform
 
 # Importing packages
 import numpy as np
-from numpy import sqrt, sin, cos, matrix, arccos, pi
+from numpy import sqrt, sin, cos, arccos, pi
 import matplotlib.pyplot as plt
 
+# Plot style
 plt.style.use("ggplot")
 
 # Constants
@@ -22,7 +23,8 @@ r = 9.0  # Radius
 countsPerRev = 400000  # Motor counts per revolution
 pitch = 0  # Movement in Y-axis
 roll = 0  # Movement in X-axis
-angles = np.linspace(-0.174533, 0.174533, num=50)  # Array of linearly spaced angels from -10, 1o degrees
+anglesPitch = np.linspace(0.0, 0.139626, num=50)  # Array of linearly spaced angels from 0, 8 degrees
+anglesRoll = np.linspace(-0.174533, 0.174533, num=50)  # Array of linearly spaced angels from -10, 10 degrees
 
 # Lists for holding simulation data
 X = []
@@ -31,12 +33,12 @@ Y2 = []
 Y3 = []
 
 # Position matrix
-p1 = matrix([0, (sqrt(3) * L) / 3, 0])
-p2 = matrix([L / 2, -((sqrt(3) * L) / 3), 0])
-p3 = matrix([-L / 2, -((sqrt(3) * L) / 3), 0])
+p1 = np.matrix([0, (sqrt(3) * L) / 3, 0])
+p2 = np.matrix([L / 2, -((sqrt(3) * L) / 3), 0])
+p3 = np.matrix([-L / 2, -((sqrt(3) * L) / 3), 0])
 
 # Zero point matrix
-p0 = matrix([[0, L / 2, -L / 2], [(sqrt(3) * L) / 3, -(sqrt(3) * L) / 3, -(sqrt(3) * L) / 3], [0, 0, 0]])
+p0 = np.matrix([[0, L / 2, -L / 2], [(sqrt(3) * L) / 3, -(sqrt(3) * L) / 3, -(sqrt(3) * L) / 3], [0, 0, 0]])
 
 # Movement matrix
 positionMatrix = np.array([[((sqrt(3) * L) / 6) * sin(pitch) * sin(roll),
@@ -49,22 +51,12 @@ positionMatrix = np.array([[((sqrt(3) * L) / 6) * sin(pitch) * sin(roll),
                             (-L / 2 * sin(roll)) + ((sqrt(3) * L) / 6) * sin(pitch) * cos(roll) + Z0]])
 
 # Simulating platform movements
-for angle in angles:
-    print('#' * 50)
+for angle in anglesPitch:
     deg = angle * 180 / pi
+    pitch = angle
+    roll = 0
+    print('#' * 50)
     print('Platform angle: ', deg)
-    pitch = 0
-    roll = angle
-
-    # Movement matrix
-    positionMatrix = np.array([[((sqrt(3) * L) / 6) * sin(pitch) * sin(roll),
-                                (L / 2 * cos(roll)) - ((sqrt(3) * L) / 6) * sin(pitch) * sin(roll),
-                                -(L / 2 * cos(roll)) - ((sqrt(3) * L) / 6) * sin(pitch) * sin(roll)],
-                               [-((sqrt(3) * L) / 6) * cos(pitch), -((sqrt(3) * L) / 6) * cos(pitch),
-                                ((sqrt(3) * L) / 6) * cos(pitch)],
-                               [-((sqrt(3) * L) / 3) * sin(pitch) * cos(roll) + Z0,
-                                (L / 2 * sin(roll)) + ((sqrt(3) * L) / 6) * sin(pitch) * cos(roll) + Z0,
-                                (-L / 2 * sin(roll)) + ((sqrt(3) * L) / 6) * sin(pitch) * cos(roll) + Z0]])
 
     # Motor lift height
     z1 = -((sqrt(3) * L) / 3) * sin(pitch) * cos(roll) + Z0
@@ -91,14 +83,16 @@ for angle in angles:
 
     # Adding values in array for visual representation
     X.append(deg)
-    Y1.append(z1)
-    Y2.append(z2)
-    Y3.append(z3)
+    Y1.append(outM1)
+    Y2.append(outM1)
+    Y3.append(outM1)
 
 # Plotting values
-plt.plot(X, Y1)
-plt.plot(X, Y2)
-plt.plot(X, Y3)
+plt.title('Pitch 0 til 8 degrees')
+plt.plot(X, Y1, label='Counts M1')
+plt.plot(X, Y2, label='Counts M2')
+plt.plot(X, Y3, label='Counts M3')
+plt.legend()
 
 # Showing values
 plt.show()

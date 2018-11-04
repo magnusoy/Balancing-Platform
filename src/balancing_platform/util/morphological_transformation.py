@@ -19,7 +19,7 @@ def nothing(x):
 
 
 # Start recording on camera
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 # Creates a window containing trackbars
 cv2.namedWindow("Trackbars")
 cv2.createTrackbar("L - H", "Trackbars", 0, 179, nothing)
@@ -34,6 +34,8 @@ while True:
 
     # Take each frame
     _, frame = cap.read()
+    # Select ROI
+    r = cv2.selectROI(frame)
 
     # Convert RGB to HSV
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
