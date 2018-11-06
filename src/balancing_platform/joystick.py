@@ -21,10 +21,8 @@ class Joystick(object):
     pygame.joystick.init()
 
     def __init__(self):
-        self.lastMove0 = 0
-        self.lastMove1 = 0
-        self.rounded1 = 0
-        self.rounded2 = 0
+        self.x = 0
+        self.y = 0
         try:
             self.joystick = pygame.joystick.Joystick(0)  # create a joystick instance
             self.joystick.init()  # init instance
@@ -37,17 +35,24 @@ class Joystick(object):
         Returns X and Y values in range from -1 to 1"""
         for event in pygame.event.get():
             if event.type == pygame.JOYAXISMOTION:  # Joystick
-                if self.joystick.get_axis(0) != self.lastMove0 or self.joystick.get_axis(1) != self.lastMove1:
-                    self.lastMove0 = self.joystick.get_axis(0)
-                    self.lastMove1 = self.joystick.get_axis(1)
-                    self.rounded1 = round(self.joystick.get_axis(0), 3)
-                    self.rounded2 = round(self.joystick.get_axis(1), 3)
-                    # print(f'Axis 0: {rounded1}  |  Axis 1: {rounded2}')
+                if self.joystick.get_axis(0) > 0.10:
+                    self.x = -1
+                elif self.joystick.get_axis(0) < -0.10:
+                    self.x = 1
+                else:
+                    self.x = 0
+
+                if self.joystick.get_axis(1) > 0.10:
+                    self.y = 1
+                elif self.joystick.get_axis(1) < -0.10:
+                    self.y = -1
+                else:
+                    self.y = 0
 
             if event.type == pygame.JOYBUTTONDOWN:
                 pass
                 # print("Joystick Button pressed")
-        return self.rounded1, self.rounded2
+        return self.x, self.y
 
 
 # Simple example of usage

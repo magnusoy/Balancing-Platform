@@ -32,8 +32,8 @@ class ObjectDetection(object):
 
         # Defining the color  in HSV
         # Find limits using morphological_transformation.py
-        lower_color = np.array([29, 111, 187])
-        upper_color = np.array([45, 163, 230])
+        lower_color = np.array([29, 125, 85])
+        upper_color = np.array([39, 181, 182])
 
         # Creates a mask
         mask = cv2.inRange(hsv, lower_color, upper_color)
