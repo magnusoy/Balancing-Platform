@@ -56,7 +56,7 @@ positionMatrix = np.array([[((sqrt(3) * L) / 6) * sin(pitch) * sin(roll),
 for angle in anglesPitch:
     deg = angle * 180 / pi
     pitch = angle
-    roll = angle
+    roll = 0
     print('#' * 50)
     print('Platform angle: ', deg)
 
@@ -85,9 +85,9 @@ for angle in anglesPitch:
 
     # Adding values in array for visual representation
     X.append(deg)
-    Y1.append(outM1)
-    Y2.append(outM2)
-    Y3.append(outM3)
+    Y1.append(z1)
+    Y2.append(z2)
+    Y3.append(z3)
 
 # Plotting values
 plt.title('Simulation -8 to 8 degrees')

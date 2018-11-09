@@ -37,3 +37,8 @@ Version 0.5
 ===========
 - Added kinematic simulation and visualization
 - Fixed main loop
+
+Version 0.6
+===========
+- Visualization refactored, and finished
+- Made visualization a stand alone application
