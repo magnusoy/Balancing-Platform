@@ -15,7 +15,7 @@ import cv2
 import numpy as np
 
 
-class ObjectDetection(object):
+class ObjectTracking(object):
     """Finds biggest object according to HSV filtering.
     Returns the coordinates in x and y plane."""
     def __init__(self, capture, watch):
@@ -84,13 +84,13 @@ if __name__ == '__main__':
     cap = cv2.VideoCapture(1)
     cap.set(propId=3, value=640)
     cap.set(propId=4, value=480)
-    objectDetection = ObjectDetection(cap, watch=True)
+    objectTracking = ObjectTracking(cap, watch=True)
 
     while True:
-        coordinates = objectDetection.getCoordinates()
+        coordinates = objectTracking.getCoordinates()
         print(coordinates)
         # Break loop with ESC-key
         key = cv2.waitKey(5) & 0xFF
         if key == 27:
-            running = objectDetection.stop()
+            running = objectTracking.stop()
             break

@@ -12,7 +12,6 @@ Website: https://github.com/magnusoy/Balancing-Platform
 
 # Importing packages
 from pymodbus.constants import Endian
-from pymodbus.payload import BinaryPayloadDecoder
 from pymodbus.payload import BinaryPayloadBuilder
 from pymodbus.client.sync import ModbusTcpClient
 
@@ -53,13 +52,13 @@ class ModbusClient(object):
         result = self.client.write_registers(address, payload, skip_encode=True, unit=1)
         return result
 
-    def read(self, address):
-        """Reads from a given address from the first modbus unit.
-        Parameters: address where the value will be read from.
-        Return: The read value in string format."""
-        result = self.client.read_holding_registers(address, 2, unit=1)
-        decoder = BinaryPayloadDecoder.fromRegisters(result.registers, byteorder=Endian.Big)
-        return str(decoder.decode_32bit_float())
+    def read(self, address=12288):
+        """Reads 20 addresses where given address is thg first in the sequence,
+        from the first modbus unit.
+        Parameters: address where the sequence will be started from.
+        Return: An array of read values"""
+        response = self.client.read_holding_registers(address, 20, unit=1)
+        return response.registers
 
     def close(self):
         """Closes the connection with the port.
@@ -71,5 +70,7 @@ class ModbusClient(object):
 # Simple example of usage
 if __name__ == '__main__':
     client = ModbusClient()
+
     while client.isConnected():
-        client.read(address=12288)
+        data = client.read()
+        print(data)

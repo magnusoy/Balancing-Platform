@@ -1,6 +1,9 @@
+scipy
 opencv-python
 numpy
 pymodbus
 vpython
 matplotlib
 pygame
+pyqtgraph
+PyQt5

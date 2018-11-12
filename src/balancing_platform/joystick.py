@@ -26,7 +26,6 @@ class Joystick(object):
         try:
             self.joystick = pygame.joystick.Joystick(0)  # create a joystick instance
             self.joystick.init()  # init instance
-            print(f'Enabled joystick: {self.joystick.get_name()}')
         except pygame.error:
             print('No joystick found.')
 
@@ -34,11 +33,11 @@ class Joystick(object):
         """Records events from joystick.
         Returns X and Y values in range from -1 to 1"""
         for event in pygame.event.get():
-            if event.type == pygame.JOYAXISMOTION:  # Joystick
+            if event.type == pygame.JOYAXISMOTION:
                 if self.joystick.get_axis(0) > 0.10:
-                    self.x = -1
-                elif self.joystick.get_axis(0) < -0.10:
                     self.x = 1
+                elif self.joystick.get_axis(0) < -0.10:
+                    self.x = -1
                 else:
                     self.x = 0
 

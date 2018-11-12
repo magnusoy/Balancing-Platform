@@ -42,3 +42,11 @@ Version 0.6
 ===========
 - Visualization refactored, and finished
 - Made visualization a stand alone application
+
+Version 0.7
+===========
+- Fixed read function in modbus class
+- Created tests for all classes
+- Renamed class ObjectDetection to ObjectTracking
+- Visualization working with modbus
+- Cleaned up syntax
