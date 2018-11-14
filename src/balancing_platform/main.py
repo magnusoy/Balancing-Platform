@@ -16,12 +16,13 @@ from video_processing import ObjectTracking
 from modbus_communication import ModbusClient
 from joystick import Joystick
 
-
 # Dictionary holding Modbus addresses
-addresses = {'Ball X': 12288,
-             'Ball Y': 12290,
-             'Joystick X': 12292,
-             'Joystick Y': 12294}
+addresses = {
+    'Ball X': 12288,
+    'Ball Y': 12290,
+    'Joystick X': 12292,
+    'Joystick Y': 12294
+}
 
 # Main loop
 if __name__ == '__main__':

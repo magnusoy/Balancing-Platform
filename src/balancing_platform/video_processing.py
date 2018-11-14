@@ -34,6 +34,8 @@ class ObjectTracking(object):
         # Find limits using morphological_transformation.py
         lower_color = np.array([29, 125, 85])
         upper_color = np.array([39, 181, 182])
+        # lower_color = np.array([43, 99, 52])
+        # upper_color = np.array([56, 165, 83])
 
         # Creates a mask
         mask = cv2.inRange(hsv, lower_color, upper_color)

@@ -23,7 +23,7 @@ r = 9.0  # Radius
 countsPerRev = 400000  # Motor counts per revolution
 pitch = 0  # Movement in Y-axis
 roll = 0  # Movement in X-axis
-anglesPitch = np.linspace(-0.139626, 0.139626, num=50)  # Array of linearly spaced angels from 0, 8 degrees
+anglesPitch = np.linspace(-0.139626, 0.139626, num=50)  # Array of linearly spaced angels from -8, 8 degrees
 anglesRoll = np.linspace(-0.139626, 0.139626, num=50)  # Array of linearly spaced angels from -8, 8 degrees
 
 # Lists for holding simulation data
