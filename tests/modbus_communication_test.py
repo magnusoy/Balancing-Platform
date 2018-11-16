@@ -15,5 +15,5 @@ if __name__ == '__main__':
     client = ModbusClient(ip='192.168.2.17')
 
     while client.isConnected():
-        response = client.read(address=12288)
+        response = client.readInt(address=12288, size=20)
         print(response)

@@ -18,9 +18,22 @@ import numpy as np
 class ObjectTracking(object):
     """Finds biggest object according to HSV filtering.
     Returns the coordinates in x and y plane."""
-    def __init__(self, capture, watch):
+    def __init__(self, capture, watch, color='green'):
         self.DEBUG = watch
         self.cap = capture
+        self.lower_color = np.array([29, 125, 85])
+        self.upper_color = np.array([39, 181, 182])
+        self.setColor(color)
+
+    def setColor(self, color):
+        """Defining the color  in HSV.
+        Find limits using morphological_transformation.py"""
+        if color == "green":
+            self.lower_color = np.array([29, 125, 85])
+            self.upper_color = np.array([39, 181, 182])
+        elif color == "red":
+            self.lower_color = np.array([0, 255, 140])
+            self.upper_color = np.array([24, 255, 255])
 
     def getCoordinates(self):
         """Finds the biggest object.
@@ -30,15 +43,8 @@ class ObjectTracking(object):
         # Convert RGB to HSV
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-        # Defining the color  in HSV
-        # Find limits using morphological_transformation.py
-        lower_color = np.array([29, 125, 85])
-        upper_color = np.array([39, 181, 182])
-        # lower_color = np.array([43, 99, 52])
-        # upper_color = np.array([56, 165, 83])
-
         # Creates a mask
-        mask = cv2.inRange(hsv, lower_color, upper_color)
+        mask = cv2.inRange(hsv, self.lower_color, self.upper_color)
 
         # Enlarge the mask
         kernel = np.ones((5, 5), np.uint8)
@@ -84,8 +90,6 @@ class ObjectTracking(object):
 # Simple example of usage.
 if __name__ == '__main__':
     cap = cv2.VideoCapture(1)
-    cap.set(propId=3, value=640)
-    cap.set(propId=4, value=480)
     objectTracking = ObjectTracking(cap, watch=True)
 
     while True:
@@ -94,5 +98,5 @@ if __name__ == '__main__':
         # Break loop with ESC-key
         key = cv2.waitKey(5) & 0xFF
         if key == 27:
-            running = objectTracking.stop()
+            objectTracking.stop()
             break

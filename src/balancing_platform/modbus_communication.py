@@ -15,8 +15,6 @@ from pymodbus.constants import Endian
 from pymodbus.payload import BinaryPayloadDecoder
 from pymodbus.payload import BinaryPayloadBuilder
 from pymodbus.client.sync import ModbusTcpClient
-from pymodbus.compat import iteritems
-from collections import OrderedDict
 
 
 class ModbusClient(object):
@@ -56,9 +54,8 @@ class ModbusClient(object):
         return result
 
     def readInt(self, address=12288, size=20):
-        """Reads 20 addresses where given address is thg first in the sequence,
-        from the first modbus unit.
-        Parameters: address where the sequence will be started from.
+        """Reads the number of addresses that the size contains.
+        The readings start from the given address.
         Return: An array of read values"""
         response = self.client.read_holding_registers(address, size, unit=1)
         return response.registers
