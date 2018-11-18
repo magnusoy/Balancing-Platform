@@ -1,9 +1,7 @@
-scipy
-opencv-python
-numpy
-pymodbus
-vpython
-matplotlib
-pygame
-pyqtgraph
-PyQt5
+opencv-python==3.4.3.18
+scipy==1.1.0
+numpy==1.15.2
+pymodbus==2.1.0
+vpython==7.4.7
+matplotlib==3.0.0
+pygame==1.9.4

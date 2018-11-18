@@ -1,6 +1,8 @@
 # Balancing platform
 
-Short description
+This project is in the subject Industrial Management Systems at NTNU and shall provide the basis for the final grade. The project is about making a regulation loop to balance a ball on a platform. As a result of this, the model is based on a Stewart platform with three degrees of freedom (pitch, roll, heave). The platform is moved by three DC servomotors located in each corner of an equal-sided triangle with the center as a trade fair. Furthermore, in order for the engines to lift the platform, a disc is attached to the shaft with an offset from the center. The motion of the three motors is determined by two PID controllers in a PLC, which gives an assertion calculated by errors and parameters. Finally, the assignment is turned into positions of the engines through a position matrix.
+
+The project will be presented as part of the oral exam in the subject. The report is written according to the given technical report templates, and contains images and text from theory, methodology and the results achieved.
 
 ### Prerequisites
 
@@ -12,13 +14,13 @@ pip install -r /path/to/requirements.txt
 
 or
 
-pip install opencv-python
-pip install numpy
-pip install pymodbus
-pip install vpython
-pip install matplotlib
-pip install simple-pid
-pip install pygame
+pip install opencv-python==3.4.3.18
+pip install scipy==1.1.0
+pip install numpy==1.15.2
+pip install pymodbus==2.1.0
+pip install vpython==7.4.7
+pip install matplotlib==3.0.0
+pip install pygame==1.9.4
 ```
 
 ### Installing
@@ -67,3 +69,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](https://gi
 [Matplotlib](https://matplotlib.org/index.html)
 
 [PyModbus](https://pymodbus.readthedocs.io/en/latest/)
+
+[PyGame](https://www.pygame.org/news)
+
