@@ -12,8 +12,7 @@ Website: https://github.com/magnusoy/Balancing-Platform
 # Importing packages
 from vpython import *
 from modbus_communication import ModbusClient
-from numpy import sqrt, sin, cos, average
-from scipy import signal
+from numpy import sqrt, sin, cos
 
 
 def translate(x, lowerIn, upperIn, lowerOut, upperOut):
@@ -24,18 +23,13 @@ def translate(x, lowerIn, upperIn, lowerOut, upperOut):
 
 # Constants
 L = 45  # Length of one side
-Z0 = 9.0  # Start lifting height
+Z0 = 8.0  # Start lifting height
 A = 4.0  # Center offset
 r = 9.0  # Radius'
 
 # Variables
 pitch, roll = 0.0, 0.0
 x_pos, y_pos = 0, 0
-
-# Filter variables
-b, a = signal.butter(8, 0.125)
-pitch_samplings = []
-roll_samplings = []
 
 # Modbus addresses
 addresses = {

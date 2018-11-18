@@ -17,7 +17,7 @@ plt.style.use("bmh")
 
 # Constants
 L = 45  # Length of one side
-Z0 = 9.0  # Start lifting height
+Z0 = 8.0  # Start lifting height
 A = 4.0  # Center offset
 r = 9.0  # Radius
 countsPerRev = 400000  # Motor counts per revolution

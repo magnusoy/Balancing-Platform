@@ -31,7 +31,7 @@ class Joystick(object):
 
     def getEvents(self):
         """Records events from joystick.
-        Returns X and Y values in range from -1 to 1"""
+        Returns X and Y values -1 and 1 accordingly."""
         for event in pygame.event.get():
             if event.type == pygame.JOYAXISMOTION:
                 if self.joystick.get_axis(0) > 0.10:

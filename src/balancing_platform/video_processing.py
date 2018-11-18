@@ -19,7 +19,7 @@ class ObjectTracking(object):
     """Finds biggest object according to HSV filtering.
     Returns the coordinates in x and y plane."""
     def __init__(self, capture, watch, color='green'):
-        self.DEBUG = watch
+        self.frame = watch
         self.cap = capture
         self.lower_color = np.array([29, 125, 85])
         self.upper_color = np.array([39, 181, 182])
@@ -59,7 +59,7 @@ class ObjectTracking(object):
             cv2.drawContours(frame, ball, -1, (0, 255, 0), 3)
             M = cv2.moments(ball)
             center = (int(M["m10"] / M["m00"]), int(M["m01"] / M["m00"]))
-            if self.DEBUG:
+            if self.frame:
                 cv2.circle(frame, center, 3, (0, 0, 255), -1)
                 cv2.putText(frame, "centroid", (center[0] + 10, center[1]), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 255),
                             1)
@@ -68,7 +68,7 @@ class ObjectTracking(object):
                 self.watch(frame, dilation)
             return center
         else:
-            if self.DEBUG:
+            if self.frame:
                 self.watch(frame, dilation)
             return 0, 0
 
