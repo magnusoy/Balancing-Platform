@@ -31,9 +31,32 @@ Adjust the sliders until the ball is the only thing white.
 Set the new values in the video_processing file and finish with running main.py
 
 ### Example
+Each class can be executed on their own for testing purposes.
+
+For single parts:
+```bash
+python joystick.py
+python modbus_communication.py
+python video_processing.py
+python visualization.py
+```
+For utility parts:
+```bash
+python graphs.py
+python inverse_kinematics.py
+python morphological_transformation.py
+```
+
+For whole project:
 ```bash
 python main.py
 ```
+or
+```bash
+python main.py
+python visualization.py
+```
+if you want to run an 3D visualization model simultaneously.
 ![Output]()
 ![Output]()
 ![Output]()
