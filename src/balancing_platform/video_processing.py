@@ -90,7 +90,7 @@ class ObjectTracking(object):
 # Simple example of usage.
 if __name__ == '__main__':
     cap = cv2.VideoCapture(1)
-    objectTracking = ObjectTracking(cap, watch=True)
+    objectTracking = ObjectTracking(cap, watch=True, color='red')
 
     while True:
         coordinates = objectTracking.getCoordinates()

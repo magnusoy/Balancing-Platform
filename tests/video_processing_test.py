@@ -14,7 +14,7 @@ from src.balancing_platform.video_processing import ObjectTracking
 
 if __name__ == '__main__':
     cap = cv2.VideoCapture(0)
-    objectTracking = ObjectTracking(cap, watch=True)
+    objectTracking = ObjectTracking(cap, watch=True, color='red')
     tracking = True
 
     while tracking:

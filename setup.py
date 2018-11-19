@@ -8,8 +8,6 @@ from setuptools import setup
 entry_points = """
 [console_scripts]
 # script_name = balancing_platform.module:function
-# For example:
-# fibonacci = balancing_platform.skeleton:run
 """
 
 
