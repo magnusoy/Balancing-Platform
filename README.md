@@ -23,7 +23,7 @@ pip install matplotlib==3.0.0
 pip install pygame==1.9.4
 ```
 
-### Installing
+### Installing and usage
 
 Clone or download project as zip in any directory.
 Find correct HSV settings for ball detection with morphological_transform file.
@@ -57,9 +57,8 @@ python main.py
 python visualization.py
 ```
 if you want to run an 3D visualization model simultaneously.
-![Output]()
-![Output]()
-![Output]()
+
+![Output](https://github.com/magnusoy/Balancing-Platform/blob/master/resources/img/readme1.JPG)
 
 
 ## Built With
