@@ -12,7 +12,7 @@ Website: https://github.com/magnusoy/Balancing-Platform
 
 # Importing packages
 import cv2
-from video_processing import ObjectTracking
+from video_processing import BallTracking
 from modbus_communication import ModbusClient
 from joystick import Joystick
 
@@ -33,11 +33,11 @@ if __name__ == '__main__':
     # Creating objects
     client = ModbusClient()
     js = Joystick()
-    objectTracking = ObjectTracking(capture=cap, watch=True, color='red')
+    ballTracking = BallTracking(capture=cap, watch=True, color='red')
 
     # Sends data over Modbus client for as long the connection is established
     while client.isConnected():
-        ball_coordinates = objectTracking.getCoordinates()
+        ball_coordinates = ballTracking.getCoordinates()
         js_coordinates = js.getEvents()
         client.sendInt(value=ball_coordinates[0], address=addresses['Ball X'])
         client.sendInt(value=ball_coordinates[1], address=addresses['Ball Y'])
@@ -47,5 +47,5 @@ if __name__ == '__main__':
         # Break loop with ESC-key
         key = cv2.waitKey(5) & 0xFF
         if key == 27:
-            objectTracking.stop()
+            ballTracking.stop()
             break

@@ -11,6 +11,7 @@ Website: https://github.com/magnusoy/Balancing-Platform
 # Importing package
 from src.balancing_platform.modbus_communication import ModbusClient
 
+# Run test
 if __name__ == '__main__':
     client = ModbusClient(ip='192.168.2.17')
 

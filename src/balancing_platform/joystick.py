@@ -34,16 +34,16 @@ class Joystick(object):
         Returns X and Y values -1 and 1 accordingly."""
         for event in pygame.event.get():
             if event.type == pygame.JOYAXISMOTION:
-                if self.joystick.get_axis(0) > 0.10:
+                if self.joystick.get_axis(0) > 0.50:
                     self.x = 1
-                elif self.joystick.get_axis(0) < -0.10:
+                elif self.joystick.get_axis(0) < -0.50:
                     self.x = -1
                 else:
                     self.x = 0
 
-                if self.joystick.get_axis(1) > 0.10:
+                if self.joystick.get_axis(1) > 0.50:
                     self.y = 1
-                elif self.joystick.get_axis(1) < -0.10:
+                elif self.joystick.get_axis(1) < -0.50:
                     self.y = -1
                 else:
                     self.y = 0

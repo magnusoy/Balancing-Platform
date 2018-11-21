@@ -21,7 +21,7 @@ def translate(x, lowerIn, upperIn, lowerOut, upperOut):
     return y
 
 
-# Constants
+# Platform Constants
 L = 45  # Length of one side
 Z0 = 8.0  # Start lifting height
 A = 4.0  # Center offset

@@ -10,19 +10,20 @@ Website: https://github.com/magnusoy/Balancing-Platform
 
 # Importing packages
 import cv2
-from src.balancing_platform.video_processing import ObjectTracking
+from src.balancing_platform.video_processing import BallTracking
 
+# Run test
 if __name__ == '__main__':
     cap = cv2.VideoCapture(0)
-    objectTracking = ObjectTracking(cap, watch=True, color='red')
+    ballTracking = BallTracking(cap, watch=True, color='red')
     tracking = True
 
     while tracking:
-        coordinates = objectTracking.getCoordinates()
+        coordinates = ballTracking.getCoordinates()
         print(coordinates)
 
         # Break loop with ESC-key
         key = cv2.waitKey(5) & 0xFF
         if key == 27:
-            tracking = objectTracking.stop()
+            tracking = ballTracking.stop()
             break

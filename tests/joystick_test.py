@@ -11,6 +11,7 @@ Website: https://github.com/magnusoy/Balancing-Platform
 # Importing package
 from src.balancing_platform.joystick import Joystick
 
+# Run test
 if __name__ == '__main__':
     joystick = Joystick()
 
