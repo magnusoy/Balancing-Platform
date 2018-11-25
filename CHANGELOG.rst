@@ -50,3 +50,8 @@ Version 0.7
 - Renamed class ObjectDetection to ObjectTracking
 - Visualization working with modbus
 - Cleaned up syntax
+
+Version 0.8
+===========
+- Fixed minor bugs
+- Everything now working as intended
