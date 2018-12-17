@@ -34,6 +34,9 @@ class BallTracking(object):
         elif color == "red":
             self.lower_color = np.array([0, 255, 140])
             self.upper_color = np.array([24, 255, 255])
+        elif color == "dark-green":
+            self.lower_color = np.array([48, 99, 48])
+            self.upper_color = np.array([65, 166, 74])
 
     def getCoordinates(self):
         """Finds the biggest object.
@@ -42,6 +45,10 @@ class BallTracking(object):
 
         # Convert RGB to HSV
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+
+        # Scale down frame to fit platform dimension
+        roi = frame[0: 480, 60: 570]
+        frame = cv2.bitwise_and(roi, roi)
 
         # Creates a mask
         mask = cv2.inRange(hsv, self.lower_color, self.upper_color)

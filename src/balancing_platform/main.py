@@ -33,7 +33,7 @@ if __name__ == '__main__':
     # Creating objects
     client = ModbusClient()
     js = Joystick()
-    ballTracking = BallTracking(capture=cap, watch=False, color='red')
+    ballTracking = BallTracking(capture=cap, watch=True, color='dark-green')
 
     # Sends data over Modbus client for as long the connection is established
     while client.isConnected():

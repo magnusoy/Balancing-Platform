@@ -21,6 +21,19 @@ def translate(x, lowerIn, upperIn, lowerOut, upperOut):
     return y
 
 
+def constrain(x, lower, upper):
+    y = 0
+    if x > upper:
+        y = upper
+    elif x < lower:
+        y = lower
+    if x > 6500:
+        y = 0
+    else:
+        y = x
+    return y
+
+
 # Platform Constants
 L = 45  # Length of one side
 Z0 = 8.0  # Start lifting height
@@ -30,6 +43,7 @@ r = 9.0  # Radius'
 # Variables
 pitch, roll = 0.0, 0.0
 x_pos, y_pos = 0, 0
+t = 0.0
 
 # Modbus addresses
 addresses = {
@@ -59,8 +73,13 @@ floor = box(pos=vector(0, -8.75, 0), size=vector(100, 1, 100), color=color.white
 leg_1 = cylinder(pos=vector(20, -Z0 - 0.4, 20), axis=vector(0, 8.75, 0), radius=1, color=color.green)
 leg_2 = cylinder(pos=vector(-20, -Z0 - 0.4, 20), axis=vector(0, 8.75, 0), radius=1, color=color.green)
 leg_3 = cylinder(pos=vector(0, -Z0 - 0.4, -20), axis=vector(0, 8.75, 0), radius=1, color=color.green)
+x_graph = graph(title="This is a x", xtitle='time', ytitle='x', fast=False, width=800, ymin=0, ymax=100, x=0, y=0)
+x_position = gcurve(color=color.blue)
+set_x_position = gcurve(color=color.red)
+y_graph = graph(title="This is a y", xtitle='time', ytitle='y', fast=False, width=800, ymin=0, ymax=100, x=300, y=300)
+y_position = gcurve(color=color.blue)
+set_y_position = gcurve(color=color.red)
 platform.pos = vector(0, 0, 0)
-
 # Create modbus client
 client = ModbusClient()
 
@@ -68,6 +87,7 @@ client = ModbusClient()
 while client.isConnected():
     # Refresh rate
     rate(10)
+    t += 0.1
 
     # Read modbus addresses for data
     response = client.readInt(address=12288, size=20)
@@ -83,6 +103,12 @@ while client.isConnected():
     roll = translate(roll, 0, 100, -8, 8)
     pitch = pitch * pi / 180
     roll = roll * pi / 180
+
+    # Graphing values
+    x_position.plot((t, constrain(x_pos, 0, 100)))
+    set_x_position.plot((t, set_x_pos))
+    y_position.plot((t, y_pos))
+    set_y_position.plot((t, set_y_pos))
 
     # Map in values to range that fits platform
     x_pos = translate(x_pos, 1, 100, -25, 25)
