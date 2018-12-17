@@ -27,7 +27,7 @@ pip install pygame==1.9.4
 
 Clone or download project as zip in any directory.
 Find correct HSV settings for ball detection with morphological_transform file.
-Adjust the sliders until the ball is the only thing white. 
+Adjust the sliders until the ball is the only thing white and crop the frame til the platform corners. 
 Set the new values in the video_processing file and finish with running main.py
 
 ### Example
@@ -51,14 +51,13 @@ For whole project:
 ```bash
 python main.py
 ```
-or
+or if you want to run an 3D visualization model simultaneously.
 ```bash
 python main.py
 python visualization.py
 ```
-if you want to run an 3D visualization model simultaneously.
 
-![Output](https://github.com/magnusoy/Balancing-Platform/blob/master/resources/img/readme1.JPG)
+![Output](https://github.com/magnusoy/Balancing-Platform/blob/master/resources/img/readme1.png)
 
 
 ## Built With
@@ -67,7 +66,7 @@ if you want to run an 3D visualization model simultaneously.
 
 ## Contributing
 
-If you want to contribute or find anything wrong, please create a Pull request, or issue adressing the change, or issue.
+If you want to contribute or find anything wrong, please create a Pull request, or issue addressing the change, or issue.
 
 
 ## Author

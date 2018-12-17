@@ -55,3 +55,10 @@ Version 0.8
 ===========
 - Fixed minor bugs
 - Everything now working as intended
+
+Version 0.9
+===========
+- Added resizing of frame functionality
+- Added real time graphs and logging in visualization
+- Added support for a more darker green color
+- Updated Readme description and image
