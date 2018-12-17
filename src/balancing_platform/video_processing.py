@@ -96,7 +96,7 @@ class BallTracking(object):
 
 # Simple example of usage.
 if __name__ == '__main__':
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(0)
     ballTracking = BallTracking(cap, watch=True, color='red')
 
     while True:
