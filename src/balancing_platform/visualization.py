@@ -73,13 +73,16 @@ floor = box(pos=vector(0, -8.75, 0), size=vector(100, 1, 100), color=color.white
 leg_1 = cylinder(pos=vector(20, -Z0 - 0.4, 20), axis=vector(0, 8.75, 0), radius=1, color=color.green)
 leg_2 = cylinder(pos=vector(-20, -Z0 - 0.4, 20), axis=vector(0, 8.75, 0), radius=1, color=color.green)
 leg_3 = cylinder(pos=vector(0, -Z0 - 0.4, -20), axis=vector(0, 8.75, 0), radius=1, color=color.green)
-x_graph = graph(title="This is a x", xtitle='time', ytitle='x', fast=False, width=800, ymin=0, ymax=100, x=0, y=0)
+x_graph = graph(title="Ballmovement in X direction", xtitle='Time[s]', ytitle='X[%]',
+                fast=False, width=800, ymin=0, ymax=100, x=0, y=0)
 x_position = gcurve(color=color.blue)
 set_x_position = gcurve(color=color.red)
-y_graph = graph(title="This is a y", xtitle='time', ytitle='y', fast=False, width=800, ymin=0, ymax=100, x=300, y=300)
+y_graph = graph(title="Ballmovement in Y direction", xtitle='Time[s]', ytitle='Y[%]',
+                fast=False, width=800, ymin=0, ymax=100, x=300, y=300)
 y_position = gcurve(color=color.blue)
 set_y_position = gcurve(color=color.red)
 platform.pos = vector(0, 0, 0)
+
 # Create modbus client
 client = ModbusClient()
 
