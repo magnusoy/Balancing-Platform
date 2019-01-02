@@ -43,12 +43,12 @@ class BallTracking(object):
         Return: X and Y coordinates from center of the object"""
         _, frame = self.cap.read()
 
+        # Scale down frame to fit platform dimension
+        roi = frame[0: 465, 94: 530]
+        frame = cv2.bitwise_and(roi, roi)
+
         # Convert RGB to HSV
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-
-        # Scale down frame to fit platform dimension
-        roi = frame[0: 480, 60: 570]
-        frame = cv2.bitwise_and(roi, roi)
 
         # Creates a mask
         mask = cv2.inRange(hsv, self.lower_color, self.upper_color)
@@ -96,8 +96,8 @@ class BallTracking(object):
 
 # Simple example of usage.
 if __name__ == '__main__':
-    cap = cv2.VideoCapture(0)
-    ballTracking = BallTracking(cap, watch=True, color='red')
+    cap = cv2.VideoCapture(1)
+    ballTracking = BallTracking(cap, watch=True, color='dark-green')
 
     while True:
         coordinates = ballTracking.getCoordinates()

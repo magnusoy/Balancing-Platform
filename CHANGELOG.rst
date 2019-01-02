@@ -62,3 +62,8 @@ Version 0.9
 - Added real time graphs and logging in visualization
 - Added support for a more darker green color
 - Updated Readme description and image
+
+Version 1.0
+===========
+- Finished
+- Everything works as expected

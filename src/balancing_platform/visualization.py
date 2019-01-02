@@ -22,6 +22,8 @@ def translate(x, lowerIn, upperIn, lowerOut, upperOut):
 
 
 def constrain(x, lower, upper):
+    """Limits the incoming value to
+    the given lower and upper limit."""
     y = 0
     if x > upper:
         y = upper
@@ -131,7 +133,7 @@ while client.isConnected():
     leg_3.axis = vector(0, y3, 0)
 
     # Update ball position
-    if x_pos == -25 and y_pos == -25:
+    if x_pos < -25 and y_pos < -25:
         ball.visible = False
     else:
         ball.visible = True
